@@ -28,36 +28,6 @@ A user-friendly, full-stack web application built with the MERN stack to help yo
 
 -----
 
-## 🧱 Architecture & Folder Structure
-
-The project follows a standard client-server architecture.
-
-```
-/
-├── client/             # React Frontend
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── redux/      # Or context/ for state management
-│   │   ├── utils/
-│   │   ├── App.js
-│   │   └── main.jsx
-│   └── package.json
-│
-└── server/             # Node.js Backend
-    ├── controllers/
-    ├── middleware/
-    ├── models/
-    │   ├── User.js
-    │   └── Transaction.js
-    ├── routes/
-    ├── config/
-    ├── .env
-    └── server.js
-```
-
------
-
 ## 🔐 Authentication
 
 Authentication is handled using **JSON Web Tokens (JWT)**. When a user logs in, a token is generated and stored in a secure, `HttpOnly` cookie. This token is sent with subsequent requests to protected API endpoints, ensuring that only authenticated users can access their financial data.
