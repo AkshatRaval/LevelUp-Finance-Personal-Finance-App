@@ -54,10 +54,6 @@ const Dashboard = () => {
     fetchUserData();
   }, [currentUser]);
 
-  // const highorlowFromLastMonth = () => {
-
-  // }
-
   const currentBalance = userData?.balance ?? 0;
   const monthlyIncome = userData?.income ?? 0;
   const monthlyExpenses = userData?.expenses ?? 0;

@@ -51,6 +51,7 @@ const Sidebar = () => {
     const handleLogout = async () => {
         try {
             await signOut(auth);
+            localStorage.removeItem("token"); 
             console.log("User signed out successfully!");
             navigate('/'); // Redirect to homepage without a full reload
         } catch (error) {
