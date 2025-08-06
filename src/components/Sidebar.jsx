@@ -91,7 +91,7 @@ const Sidebar = () => {
                         <p className="text-sm text-muted-foreground truncate">{loading ? '...' : userData?.email || ''}</p>
                     </div>
                 </div>
-                <Link to="/add-transaction" className="flex items-center justify-center gap-2 text-sm bg-primary text-primary-foreground py-2 rounded-sm hover:bg-primary/90 transition-all">
+                <Link to="/dashboard/addtransactions" className="flex items-center justify-center gap-2 text-sm bg-primary text-primary-foreground py-2 rounded-sm hover:bg-primary/90 transition-all">
                     <Plus size={20} />
                     Add Transaction
                 </Link>

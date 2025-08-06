@@ -10,6 +10,7 @@ import Transactions from "./pages/Transactions";
 import Dashboard from "./pages/Dashboard";
 import Budget from "./pages/Budget";
 import Profile from "./pages/Profile";
+import AddTransaction from "./pages/AddTransaction";
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
           <Route path="transactions" element={<Transactions />} />  {/* /dashboard/transactions */}
           <Route path="budget" element={<Budget />} />        {/* /dashboard/budget */}
           <Route path="profile" element={<Profile />} />      {/* /dashboard/profile */}
+          <Route path="addtransactions" element={<AddTransaction />} />      {/* /dashboard/addTransaction */}
 
         </Route>
       </Routes>
