@@ -60,11 +60,11 @@ const Profile = () => {
         },
     ]
 
-    const memberSince = userData?.createdAt ? new Date(userData.createdAt).toLocaleDateString() : 'N/A';
-    const totalTransactions = 0;
-    const totalBudget = userData?.budget || 0;
-    const totalIncome = userData?.income || 0;
-    const totalExpenses = 0;
+    // const memberSince = userData?.createdAt ? new Date(userData.createdAt).toLocaleDateString() : 'N/A';
+    // const totalTransactions = 0;
+    // const totalBudget = userData?.budget || 0;
+    // const totalIncome = userData?.income || 0;
+    // const totalExpenses = 0;
 
     return (
         <div className='w-full'>

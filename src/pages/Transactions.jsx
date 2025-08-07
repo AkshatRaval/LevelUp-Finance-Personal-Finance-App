@@ -1,28 +1,40 @@
-import { ArrowDownRight, ArrowUpRight, Plus, Tag } from 'lucide-react'
+import { ArrowDownRight, ArrowUpRight, History, Plus, Tag } from 'lucide-react'
 import React, { useState } from 'react'
 import { useAuth } from '../contexts/AuthContexts';
 import DashboardCards from '../components/DashboardCards';
 import { useNavigate } from 'react-router-dom';
+import { useTransactionData } from '../utils/useTransactionData';
 
 const Transactions = () => {
 
-  
+  const calculaeTotalIncome = (transactions) => {
+    return transactions.reduce((total, transaction) => {
+      return transaction.type === 'income' ? total + transaction.amount : total;
+    }, 0);
+  }
+  const calculaeTotalExpenses = (transactions) => {
+    return transactions.reduce((total, transaction) => {
+      return transaction.type === 'expense' ? total + transaction.amount : total;
+    }, 0);
+  }
+
   const navigate = useNavigate();
   const { currentUser } = useAuth();
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true); // Add a loading state
+  const transactions = useTransactionData().transactionData
+  const totalTeansactions = transactions.length; // Placeholder, replace with actual logic if needed
+  const totalIncome = calculaeTotalIncome(transactions); // Placeholder, replace with actual logic if needed
+  const totalExpenses = calculaeTotalExpenses(transactions) * -1; // Placeholder, replace with actual logic if needed
 
-  const totalTeansactions = 0; // Placeholder, replace with actual logic if needed
-  const totalIncome = 0; // Placeholder, replace with actual logic if needed
-  const totalExpenses = 0; // Placeholder, replace with actual logic if needed
   const transactionsData = [
     {
       id: 1,
       title: 'Total Transactions',
       value: totalTeansactions,
       ValueColor: 'text-black',
-      color: 'bg-gradient-to-r from-green-400 to-green-600',
       icon: Tag,
+      ValueColor: 'text-black',
       sign: '',
       insight: 'In Selected Period',
     },
@@ -31,8 +43,8 @@ const Transactions = () => {
       title: 'Total Income',
       value: totalIncome,
       ValueColor: 'text-black',
-      color: 'bg-gradient-to-r from-green-400 to-green-600',
       icon: ArrowUpRight,
+      ValueColor: 'text-green-600',
       sign: '₹',
       insight: 'From filtered transactions',
     },
@@ -41,8 +53,8 @@ const Transactions = () => {
       title: 'Total Expenses',
       value: totalExpenses,
       ValueColor: 'text-black',
-      color: 'bg-gradient-to-r from-green-400 to-green-600',
       icon: ArrowDownRight,
+      ValueColor: 'text-red-600',
       sign: '₹',
       insight: 'From filtered transactions',
     },
@@ -63,8 +75,30 @@ const Transactions = () => {
             <DashboardCards key={card.id} card={card} />
           ))}
         </div>
-        <div className='border border-border bg-white rounded-lg p-4 mt-4 '>
-          
+        <div>
+          <div className='border border-border bg-white rounded-lg p-4 mt-4'>
+            <div className='flex items-center gap-2 mb-4'>
+              <History />
+              <div>
+                <h1 className='text-2xl font-semibold'>Recent Transactions</h1>
+                <p className='text-sm text-muted-foreground'>Here are your latest transactions</p>
+              </div>
+            </div>
+            {transactions.map((transaction) => (
+              <div className='border border-border bg-white rounded-lg p-4 mt-4 shadow' key={transaction.id}>
+                <div className='flex justify-between items-center'>
+                  <div>
+                    <h2 className='text-lg font-semibold'>{transaction.description}</h2>
+                    <p className='text-sm text-muted-foreground'>{transaction.category}</p>
+                  </div>
+                  <div className={`text-lg font-semibold ${transaction.type === 'income' ? 'text-green-600' : 'text-red-600'}`}>
+                    {transaction.type === 'income' ? '+' : '-'} ₹{transaction.amount}
+                  </div>
+                </div>
+                <p className='text-sm text-muted-foreground mt-1'>{new Date(transaction.date).toLocaleDateString()}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>

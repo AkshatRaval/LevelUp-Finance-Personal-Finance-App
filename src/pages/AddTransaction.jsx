@@ -1,13 +1,13 @@
-import React from 'react'
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { useUserData } from "../utils/useUserData";
 import { db } from "../firebase";
 import { useAuth } from '../contexts/AuthContexts';
 import { ArrowLeft } from 'lucide-react';
+import { useNavigate } from "react-router-dom";
 
 const AddTransaction = () => {
 
     const { currentUser } = useAuth();   
+    const navigate = useNavigate();
     
     const handleAddTransaction = async (e) => {
         e.preventDefault()
@@ -32,6 +32,9 @@ const AddTransaction = () => {
             // Add the document to the 'transactions' collection
             await addDoc(collection(db, "transactions"), newTransaction);
             console.log("Transaction added successfully!");
+            // Optionally, you can redirect or reset the form here
+            e.target.reset(); // Reset the form after submission
+            navigate('/dashboard/transactions'); // Redirect to transactions page
 
         } catch (error) {
             console.error("Error adding transaction: ", error);
