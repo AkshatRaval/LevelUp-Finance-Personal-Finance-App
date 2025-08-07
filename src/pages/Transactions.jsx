@@ -1,108 +1,147 @@
-import { ArrowDownRight, ArrowUpRight, History, Plus, Tag } from 'lucide-react'
-import React, { useState } from 'react'
-import { useAuth } from '../contexts/AuthContexts';
-import DashboardCards from '../components/DashboardCards';
+import { ArrowDownRight, ArrowUpRight, History, Plus, Tag } from 'lucide-react';
+import React, { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTransactionData } from '../utils/useTransactionData';
+import DashboardCards from '../components/DashboardCards';
+import TransactionFilters from '../components/TransactionsFilter'; // Ensure this path is correct
 
 const Transactions = () => {
+    const navigate = useNavigate();
 
-  const calculaeTotalIncome = (transactions) => {
-    return transactions.reduce((total, transaction) => {
-      return transaction.type === 'income' ? total + transaction.amount : total;
-    }, 0);
-  }
-  const calculaeTotalExpenses = (transactions) => {
-    return transactions.reduce((total, transaction) => {
-      return transaction.type === 'expense' ? total + transaction.amount : total;
-    }, 0);
-  }
+    // --- State and Data Fetching ---
+    // 1. Get the master list of transactions from your custom hook
+    const { transactionData: allTransactions, loading } = useTransactionData();
 
-  const navigate = useNavigate();
-  const { currentUser } = useAuth();
-  const [userData, setUserData] = useState(null);
-  const [loading, setLoading] = useState(true); // Add a loading state
-  const transactions = useTransactionData().transactionData
-  const totalTeansactions = transactions.length; // Placeholder, replace with actual logic if needed
-  const totalIncome = calculaeTotalIncome(transactions); // Placeholder, replace with actual logic if needed
-  const totalExpenses = calculaeTotalExpenses(transactions) * -1; // Placeholder, replace with actual logic if needed
+    // 2. State to hold the current filter settings
+    const [filters, setFilters] = useState({
+        search: '',
+        category: 'All Categories',
+        type: 'All Types',
+    });
 
-  const transactionsData = [
-    {
-      id: 1,
-      title: 'Total Transactions',
-      value: totalTeansactions,
-      ValueColor: 'text-black',
-      icon: Tag,
-      ValueColor: 'text-black',
-      sign: '',
-      insight: 'In Selected Period',
-    },
-    {
-      id: 2,
-      title: 'Total Income',
-      value: totalIncome,
-      ValueColor: 'text-black',
-      icon: ArrowUpRight,
-      ValueColor: 'text-green-600',
-      sign: '₹',
-      insight: 'From filtered transactions',
-    },
-    {
-      id: 3,
-      title: 'Total Expenses',
-      value: totalExpenses,
-      ValueColor: 'text-black',
-      icon: ArrowDownRight,
-      ValueColor: 'text-red-600',
-      sign: '₹',
-      insight: 'From filtered transactions',
-    },
-  ]
+    // --- Filtering Logic ---
+    // 3. The function that receives filter changes from the TransactionFilters component
+    const handleFilterChange = useCallback((newFilters) => {
+        setFilters(newFilters);
+    }, []); // useCallback prevents this function from being recreated on every render
 
-  return (
-    <>
-      <div className='w-full'>
-        <div className='flex items-center justify-between mb-4'>
-          <div >
-            <h1 className='text-4xl font-bold'>Transactions</h1>
-            <p className='text-lg text-muted-foreground'>Track and manage your financial transactions</p>
-          </div>
-          <button className='flex gap-2 bg-primary text-primary-foreground px-5 py-2 rounded-lg font-semibold' onClick={() => navigate('/dashboard/addtransactions')}><Plus size={20} />Add Transaction</button>
-        </div>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
-          {transactionsData.map(card => (
-            <DashboardCards key={card.id} card={card} />
-          ))}
-        </div>
-        <div>
-          <div className='border border-border bg-white rounded-lg p-4 mt-4'>
-            <div className='flex items-center gap-2 mb-4'>
-              <History />
-              <div>
-                <h1 className='text-2xl font-semibold'>Recent Transactions</h1>
-                <p className='text-sm text-muted-foreground'>Here are your latest transactions</p>
-              </div>
-            </div>
-            {transactions.map((transaction) => (
-              <div className='border border-border bg-white rounded-lg p-4 mt-4 shadow' key={transaction.id}>
-                <div className='flex justify-between items-center'>
-                  <div>
-                    <h2 className='text-lg font-semibold'>{transaction.description}</h2>
-                    <p className='text-sm text-muted-foreground'>{transaction.category}</p>
-                  </div>
-                  <div className={`text-lg font-semibold ${transaction.type === 'income' ? 'text-green-600' : 'text-red-600'}`}>
-                    {transaction.type === 'income' ? '+' : '-'} ₹{transaction.amount}
-                  </div>
+    // 4. Apply the filters to create a new array of transactions to display
+    const filteredTransactions = allTransactions.filter(t => {
+        // Ensure t.description is a string before calling .toLowerCase()
+        const description = t.description || '';
+        const searchMatch = description.toLowerCase().includes(filters.search.toLowerCase());
+        const categoryMatch = filters.category === 'All Categories' || t.category === filters.category;
+        const typeMatch = filters.type === 'All Types' || t.type === filters.type;
+        return searchMatch && categoryMatch && typeMatch;
+    });
+
+    // --- Calculation Functions (now using the filtered list) ---
+    const calculateTotalIncome = (transactions) => {
+        return transactions.reduce((total, transaction) => {
+            return transaction.type === 'income' ? total + transaction.amount : total;
+        }, 0);
+    };
+
+    const calculateTotalExpenses = (transactions) => {
+        return transactions.reduce((total, transaction) => {
+            return transaction.type === 'expense' ? total + transaction.amount : total;
+        }, 0);
+    };
+
+    // --- Data for Dashboard Cards (calculated from filtered transactions) ---
+    const totalTransactions = filteredTransactions.length;
+    const totalIncome = calculateTotalIncome(filteredTransactions);
+    const totalExpenses = calculateTotalExpenses(filteredTransactions);
+
+    const transactionsData = [
+        {
+            id: 1,
+            title: 'Total Transactions',
+            value: totalTransactions,
+            icon: Tag,
+            ValueColor: 'text-black',
+            sign: '',
+            insight: 'In Selected Period',
+        },
+        {
+            id: 2,
+            title: 'Total Income',
+            value: totalIncome,
+            icon: ArrowUpRight,
+            ValueColor: 'text-green-600',
+            sign: '₹',
+            insight: 'From filtered transactions',
+        },
+        {
+            id: 3,
+            title: 'Total Expenses',
+            value: totalExpenses * -1, // Display as a positive number
+            icon: ArrowDownRight,
+            ValueColor: 'text-red-600',
+            sign: '₹',
+            insight: 'From filtered transactions',
+        },
+    ];
+
+    if (loading) {
+        return <div>Loading transactions...</div>; // Show a loading state
+    }
+
+    return (
+        <>
+            <div className='w-full'>
+                <div className='flex items-center justify-between mb-4'>
+                    <div>
+                        <h1 className='text-4xl font-bold'>Transactions</h1>
+                        <p className='text-lg text-muted-foreground'>Track and manage your financial transactions</p>
+                    </div>
+                    <button className='flex gap-2 bg-primary text-primary-foreground px-5 py-2 rounded-lg font-semibold' onClick={() => navigate('/dashboard/addtransactions')}><Plus size={20} />Add Transaction</button>
                 </div>
-                <p className='text-sm text-muted-foreground mt-1'>{new Date(transaction.date).toLocaleDateString()}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </>
-  )
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
+                    {transactionsData.map(card => (
+                        <DashboardCards key={card.id} card={card} />
+                    ))}
+                </div>
+
+                {/* --- Add Transactions Filter Here --- */}
+                <div className="mt-6">
+                    <TransactionFilters onFilterChange={handleFilterChange} />
+                </div>
+
+
+                <div>
+                    <div className='border border-border bg-white rounded-lg p-4 mt-4'>
+                        <div className='flex items-center gap-2 mb-4'>
+                            <History />
+                            <div>
+                                <h1 className='text-2xl font-semibold'>Transaction History</h1>
+                                <p className='text-sm text-muted-foreground'>Showing {filteredTransactions.length} of {allTransactions.length} transactions</p>
+                            </div>
+                        </div>
+                        {/* --- Map over the FILTERED transactions --- */}
+                        {filteredTransactions.length > 0 ? (
+                            filteredTransactions.map((transaction) => (
+                                <div className='border border-border bg-white rounded-lg p-4 mt-4 shadow' key={transaction.id}>
+                                    <div className='flex justify-between items-center'>
+                                        <div>
+                                            <h2 className='text-lg font-semibold'>{transaction.description}</h2>
+                                            <p className='text-sm text-muted-foreground'>{transaction.category}</p>
+                                        </div>
+                                        <div className={`text-lg font-semibold ${transaction.type === 'income' ? 'text-green-600' : 'text-red-600'}`}>
+                                            {transaction.type === 'income' ? '+' : '-'} ₹{transaction.amount}
+                                        </div>
+                                    </div>
+                                    <p className='text-sm text-muted-foreground mt-1'>{new Date(transaction.date).toLocaleDateString()}</p>
+                                </div>
+                            ))
+                        ) : (
+                            <p className="text-center text-muted-foreground mt-6">No transactions match the current filters.</p>
+                        )}
+                    </div>
+                </div>
+            </div>
+        </>
+    )
 }
 
-export default Transactions
+export default Transactions;

@@ -6,9 +6,9 @@ import { useNavigate } from "react-router-dom";
 
 const AddTransaction = () => {
 
-    const { currentUser } = useAuth();   
+    const { currentUser } = useAuth();
     const navigate = useNavigate();
-    
+
     const handleAddTransaction = async (e) => {
         e.preventDefault()
         const formData = new FormData(e.target)
@@ -65,7 +65,20 @@ const AddTransaction = () => {
 
                     <div>
                         <label className='block text-sm font-medium'>Category</label>
-                        <input type="text" name="category" required className='w-full p-2 border border-border rounded-lg' />
+                        <select
+                            name="category"
+                            required
+                            defaultValue=""
+                            className='w-full p-2 border border-border rounded-lg bg-white'>
+                            <option value="" disabled>Select a category</option>
+                            <option value="Food & Dining">Food & Dining</option>
+                            <option value="Transportation">Transportation</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Bills">Bills</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Income">Income</option>
+                            <option value="Investment">Investment</option>
+                        </select>
                     </div>
 
                     <div>
@@ -88,7 +101,7 @@ const AddTransaction = () => {
                         <textarea name="note" rows="3" className='w-full p-2 border border-border rounded-lg'></textarea>
                     </div>
                     <div className='flex justify-end gap-2'>
-                        <button className='bg-primary-foreground text-primary border px-5 py-2 rounded-lg font-semibold' onClick={()=>navigate()}>Cancel</button>
+                        <button className='bg-primary-foreground text-primary border px-5 py-2 rounded-lg font-semibold' onClick={() => navigate()}>Cancel</button>
                         <button type="submit" className='bg-primary text-primary-foreground px-5 py-2 rounded-lg font-semibold'>Add Transaction</button>
                     </div>
                 </form>
