@@ -1,5 +1,5 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { Camera, Eye, EyeClosed, User } from 'lucide-react';
+import { Eye, EyeClosed, User } from 'lucide-react';
 import React, { useState } from 'react';
 import { auth } from '../firebase'; // Make sure this path is correct
 
@@ -13,6 +13,12 @@ const Login = () => {
     const toggleIsOpen = () => {
         setIsOpen(!isOpen);
     };
+
+    if (localStorage.getItem('token')) {
+        window.location.href = '/dashboard'; // Redirect if already logged in
+        return null; // Prevent rendering the login form
+
+    }
 
     // 2. The improved login handler function
     const handleLogin = async (e) => {
@@ -46,7 +52,7 @@ const Login = () => {
     };
 
     return (
-        <div className='bg-background w-screen h-screen flex items-center justify-center'>
+        <div className='bg-background w-screen h-screen flex items-center justify-center text-foreground'>
             <div className='bg-card p-5 flex flex-col items-center justify-between min-w-[20%] rounded-2xl shadow-2xl '>
                 <div className='bg-accent p-5 my-5 rounded-full flex items-center justify-center'>
                     <User size={40} className='text-accent-foreground' />
@@ -92,7 +98,7 @@ const Login = () => {
                     </button>
                 </form>
 
-                <p>Don't have an account? <a href="/signup" className='text-primary underline'>Sign up</a></p>
+                <p>Don't have an account? <a href="/signup" className='text-primary-foreground underline'>Sign up</a></p>
             </div>
         </div>
     );

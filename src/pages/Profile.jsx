@@ -1,5 +1,5 @@
 import { Bell, Edit, Moon, Settings, Shield, Sun, User, Wallet } from 'lucide-react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAuth } from '../contexts/AuthContexts'
 import { useUserData } from '../utils/useUserData'
 import Toggle from '../components/Toggle'
@@ -16,9 +16,19 @@ const Profile = () => {
     const toggleEdit = () => {
         setIsEditing(!isEditing)
     }
+
     const toggleDark = () => {
-        setIsDark(!isDark)
+        setIsDark(!isDark);
+        document.documentElement.classList.toggle('dark', !isDark);
+        localStorage.setItem('darkMode', !isDark) // Toggle dark mode class
     }
+
+    useEffect(() => {
+        const darkMode = localStorage.getItem('darkMode') === 'true' ;
+        setIsDark(darkMode);
+        document.documentElement.classList.toggle('dark', darkMode); // Apply dark mode class based on localStorage
+    }, [])
+
     const location = useLocation(); // Gets the current URL path
     const navigate = useNavigate(null)
 
@@ -67,19 +77,19 @@ const Profile = () => {
     // const totalExpenses = 0;
 
     return (
-        <div className='w-full'>
+        <div className='w-full text-foreground'>
             <div>
-                <h1 className='text-4xl font-bold '>Profile & Settings</h1>
+                <h1 className='text-4xl font-bold'>Profile & Settings</h1>
                 <p className='text-lg text-muted-foreground'>Manage your account and preferences</p>
             </div>
 
             {/* Left Side */}
             <div className='flex w-full mt-4 gap-6'>
                 <div className='w-full'>
-                    <div className='border border-border bg-white rounded-lg p-4 mt-4 '>
+                    <div className='border border-border bg-card rounded-lg p-4 mt-4 '>
                         <div className='flex justify-between items-center mb-4'>
                             <p className='flex items-center gap-2 text-lg'><User size={18} />Pesonal Information</p>
-                            <button className='flex items-center gap-2 text-lg border border-border bg-background p-2 rounded-lg hover:text-accent-foreground hover:bg-accent'> <Edit size={18} />Edit</button>
+                            <button className='flex items-center gap-2 text-lg border border-border bg-background p-2 rounded-lg text-foreground hover:text-accent-foreground hover:bg-accent'> <Edit size={18} />Edit</button>
                         </div>
                         <div>
                             <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
@@ -106,7 +116,7 @@ const Profile = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='border border-border bg-white rounded-lg p-4 mt-4 '>
+                    <div className='border border-border bg-card text-foreground rounded-lg p-4 mt-4 '>
                         <h1 className='flex items-center gap-2 text-lg' ><Bell size={18} />Notification Preferences</h1>
                         <p className='mb-4 text-muted-foreground'>Choose what notifications you'd like to receive</p>
 
@@ -127,8 +137,8 @@ const Profile = () => {
                 </div>
 
                 {/* Right Side */}
-                <div className='w-[50%] flex flex-col gap-4'>
-                    <div className='border border-border bg-white rounded-lg p-4 mt-4 min-w-[20%]'>
+                <div className='w-[50%] flex flex-col gap-4 text-foreground'>
+                    <div className='border border-border bg-card rounded-lg p-4 mt-4 min-w-[20%]'>
                         <h1 className='flex items-center gap-2 mb-4 text-lg' ><Settings size={18} />Appearance</h1>
                         <div className='flex items-center gap-3 mt-4'>
                             {isDark ? <Moon /> : <Sun />}
@@ -136,15 +146,15 @@ const Profile = () => {
                                 <h1 className='text-lg'>Dark Mode</h1>
                                 {isDark ? <p className='text-sm'>Dark Theme</p> : <p className='text-sm'>Light Theme</p>}
                             </div>
-                            <Toggle fn={() => { toggleDark() }} />
+                            <Toggle fn={() => { toggleDark() }} checked={localStorage.getItem('darkMode') === 'true'} />
 
                         </div>
                     </div>
                     <div className='border border-border bg-card rounded-lg p-4 mt-4 min-w-[20%]'>
                         <h1 className='flex items-center gap-2 mb-4 text-lg' ><Shield size={18} />Account</h1>
-                        <button className='w-full my-1 flex items-center hover:bg-accent text-lg hover:text-accent-foreground text-black py-2 rounded-xl border border-border transition-all px-4 gap-2'><Wallet size={18} />Connected Accounts</button>
-                        <button className='w-full my-1 flex items-center hover:bg-accent text-lg hover:text-accent-foreground text-black py-2 rounded-xl border border-border transition-all px-4 gap-2'><Shield size={18} />Security Setting</button>
-                        <button className='w-full my-1 hover:bg-destructive text-lg hover:text-white text-destructive py-2 rounded-xl border border-destructive transition-all' onClick={handleLogout}>Logout</button>
+                        <button className='w-full my-1 flex items-center hover:bg-accent text-lg hover:text-accent-foreground text-foreground py-2 rounded-xl border border-border transition-all px-4 gap-2'><Wallet size={18} />Connected Accounts</button>
+                        <button className='w-full my-1 flex items-center hover:bg-accent text-lg hover:text-accent-foreground text-foreground py-2 rounded-xl border border-border transition-all px-4 gap-2'><Shield size={18} />Security Setting</button>
+                        <button className='w-full my-1 hover:bg-destructive text-lg hover:text-foreground text-destructive py-2 rounded-xl border border-destructive transition-all' onClick={handleLogout}>Logout</button>
                     </div>
 
                 </div>

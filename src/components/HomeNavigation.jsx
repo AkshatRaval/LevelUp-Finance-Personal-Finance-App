@@ -11,11 +11,11 @@ const Navigation = () => {
         </a>
         <div className="flex gap-10">
           {/* Navigation Links */}
-          <nav className="hidden md:flex items-center gap-8 text-[18px] font-medium text-gray-700">
-            <a href="#home" className="hover:text-blue-600 transition-all duration-200">Home</a>
-            <a href="#features" className="hover:text-blue-600 transition-all duration-200">Features</a>
-            <a href="#about" className="hover:text-blue-600 transition-all duration-200">About</a>
-            <a href="#contact" className="hover:text-blue-600 transition-all duration-200">Contact</a>
+          <nav className="hidden md:flex items-center gap-8 text-[18px] font-medium text-background">
+            <a href="#home" className="hover:text-primary transition-all duration-200">Home</a>
+            <a href="#features" className="hover:text-primary transition-all duration-200">Features</a>
+            <a href="#about" className="hover:text-primary transition-all duration-200">About</a>
+            <a href="#contact" className="hover:text-primary transition-all duration-200">Contact</a>
           </nav>
 
           {/* CTA Button */}

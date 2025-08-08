@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import PrivateRoute from "./components/PrivateRoutes";
@@ -16,6 +16,13 @@ import AddTransaction from "./pages/AddTransaction";
 function App() {
 
   const [userAutheticated, setUserAutheticated] = useState(false)
+  const [isDark, setIsDark] = useState(false);
+  useEffect(() => {
+    const darkMode = localStorage.getItem('darkMode') === 'true';
+    setIsDark(darkMode);
+    document.documentElement.classList.toggle('dark', darkMode); // Apply dark mode class based on localStorage
+  }, [])
+
   return (
     <Router>
       <Routes>

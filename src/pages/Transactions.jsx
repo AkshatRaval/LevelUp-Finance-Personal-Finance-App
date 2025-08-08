@@ -1,5 +1,5 @@
 import { ArrowDownRight, ArrowUpRight, History, Plus, Tag } from 'lucide-react';
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTransactionData } from '../utils/useTransactionData';
 import DashboardCards from '../components/DashboardCards';
@@ -18,6 +18,15 @@ const Transactions = () => {
         category: 'All Categories',
         type: 'All Types',
     });
+
+
+    const [isDark, setIsDark] = useState(false);
+    useEffect(() => {
+        const darkMode = localStorage.getItem('darkMode') === 'true';
+        setIsDark(darkMode);
+        document.documentElement.classList.toggle('dark', darkMode); // Apply dark mode class based on localStorage
+    }, [])
+
 
     // --- Filtering Logic ---
     // 3. The function that receives filter changes from the TransactionFilters component
@@ -59,7 +68,7 @@ const Transactions = () => {
             title: 'Total Transactions',
             value: totalTransactions,
             icon: Tag,
-            ValueColor: 'text-black',
+            ValueColor: 'text-foreground',
             sign: '',
             insight: 'In Selected Period',
         },
@@ -68,7 +77,7 @@ const Transactions = () => {
             title: 'Total Income',
             value: totalIncome,
             icon: ArrowUpRight,
-            ValueColor: 'text-green-600',
+            ValueColor: 'text-instructive',
             sign: '₹',
             insight: 'From filtered transactions',
         },
@@ -77,7 +86,7 @@ const Transactions = () => {
             title: 'Total Expenses',
             value: totalExpenses * -1, // Display as a positive number
             icon: ArrowDownRight,
-            ValueColor: 'text-red-600',
+            ValueColor: 'text-destructive',
             sign: '₹',
             insight: 'From filtered transactions',
         },
@@ -89,7 +98,7 @@ const Transactions = () => {
 
     return (
         <>
-            <div className='w-full'>
+            <div className='w-full text-foreground'>
                 <div className='flex items-center justify-between mb-4'>
                     <div>
                         <h1 className='text-4xl font-bold'>Transactions</h1>

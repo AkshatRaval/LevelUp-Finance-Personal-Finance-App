@@ -67,7 +67,7 @@ const Dashboard = () => {
       id: 1,
       title: 'Current Balance',
       value: currentBalance,
-      ValueColor: 'text-black',
+      ValueColor: 'text-foreground',
       color: 'bg-gradient-to-r from-green-400 to-green-600',
       icon: DollarSign,
       sign: '₹',
@@ -107,7 +107,7 @@ const Dashboard = () => {
 
 
   return (
-    <div>
+    <div className='w-full text-foreground'>
       <div>
         <h1 className='text-4xl font-bold text-foreground'>Dashboard</h1>
         <p className='text-lg text-muted-foreground'>Welcome back! Here's your financial overview.</p>

@@ -2,7 +2,7 @@ import React from 'react'
 
 const DashboardCards = ({ card }) => {
     return (
-        <div className='bg-white border border-border p-5 rounded-lg shadow-sm hover:shadow-md transition-shadow'>
+        <div className='bg-card border border-border p-5 rounded-lg shadow-sm hover:shadow-md transition-shadow text-foreground'>
             <div className='text-lg font-semibold mb-9 flex items-center justify-between'>
                 <h2>{card.title}</h2>
                 <card.icon size={14} color={card.value < 0 ? 'red' : 'green'} />

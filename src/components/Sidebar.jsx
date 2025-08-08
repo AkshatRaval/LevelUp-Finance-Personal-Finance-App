@@ -67,7 +67,7 @@ const Sidebar = () => {
     };
 
     return (
-        <section className="w-64 h-screen bg-white border-border border-r relative flex flex-col">
+        <section className="w-64 h-screen bg-card border-border border-r relative flex flex-col text-foreground">
             <div className="p-6 border-b border-border">
                 <div className="flex items-center gap-3">
                     <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
@@ -103,7 +103,7 @@ const Sidebar = () => {
                         <Link
                             key={item.id}
                             to={item.path} 
-                            className={`w-full text-left flex items-center gap-2 text-lg text-muted-foreground transition-colors cursor-pointer p-2 rounded-md hover:bg-accent ${location.pathname === item.path ? 'bg-primary text-primary-foreground hover:bg-primary/90' : ''}`}>
+                            className={`w-full text-left flex items-center gap-2 text-lg text-muted-foreground transition-colors cursor-pointer p-2 rounded-md hover:bg-background ${location.pathname === item.path ? 'bg-primary text-primary-foreground hover:bg-primary/90' : ''}`}>
                             <item.icon size={16} />
                             {item.label}
                         </Link>
@@ -112,7 +112,7 @@ const Sidebar = () => {
             </div>
             {/* Logout button */}
             <div className="p-4 border-t border-border">
-                <button className='text-lg flex gap-2 items-center justify-center border border-red-500 rounded-sm w-full py-2 px-5 text-red-500 hover:bg-red-500 hover:text-primary-foreground transition-colors' onClick={handleLogout}>
+                <button className='text-lg flex gap-2 items-center justify-center border border-destructive rounded-sm w-full py-2 px-5 text-destructive hover:bg-destructive hover:text-primary-foreground transition-colors' onClick={handleLogout}>
                     <LogOut size={16} />
                     Logout
                 </button>

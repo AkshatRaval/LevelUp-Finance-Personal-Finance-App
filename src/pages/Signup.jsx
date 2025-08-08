@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { Camera, Eye, EyeClosed, User } from 'lucide-react';
-import React, { useState } from 'react'; // Make sure useState is imported
+import React, { useEffect, useState } from 'react'; // Make sure useState is imported
 import { auth } from '../firebase';
 
 const Signup = () => {
@@ -9,6 +9,13 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(''); // To show feedback to the user
   const [isOpen, setIsOpen] = useState(false);
+
+  if (localStorage.getItem('token')) {
+    window.location.href = '/dashboard'; // Redirect if already logged in
+    return null; // Prevent rendering the login form
+
+  }
+
 
   const toggleIsOpen = () => {
     setIsOpen(!isOpen);
@@ -53,10 +60,10 @@ const Signup = () => {
   };
 
   return (
-    <div className='bg-background w-screen h-screen flex items-center justify-center'>
+    <div className='bg-background w-screen h-screen flex items-center justify-center text-foreground'>
       <div className='bg-card p-5 flex flex-col items-center justify-between min-w-[20%] rounded-2xl shadow-2xl'>
         <div className='bg-accent p-5 my-5 rounded-full flex items-center justify-center'>
-          <User size={40} className='text-accent-foreground'/>
+          <User size={40} className='text-accent-foreground' />
         </div>
         <div className='flex flex-col items-center justify-between mb-10 text-foreground'>
           {/* Minor Fix: Changed text to be more appropriate for a sign-up page */}
@@ -102,7 +109,7 @@ const Signup = () => {
           {error && <p className='text-destructive text-sm my-2'>{error}</p>}
 
           {/* Minor Fix: Changed button text to "Sign Up" and type to "submit" */}
-          <button type="submit" className='bg-primary w-full p-3 text-card text-lg rounded-2xl cursor-pointer my-5'>
+          <button type="submit" className='bg-primary w-full p-3 text-foreground text-lg rounded-2xl cursor-pointer my-5'>
             Sign Up
           </button>
         </form>
