@@ -18,6 +18,7 @@
   --accent: #e0f2fe;
   --accent-foreground: #0369a1;
   --destructive: #ef4444;
+  --instructive: #07ca00cb;
   --destructive-foreground: #ffffff;
   --border: #e2e8f0;
   --input: transparent;
@@ -58,6 +59,7 @@
   --accent: #1e293b;
   --accent-foreground: #60a5fa;
   --destructive: #ef4444;
+  --instructive: #07ca00cb;
   --destructive-foreground: #ffffff;
   --border: #334155;
   --input: #334155;
@@ -92,9 +94,12 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  
   --color-destructive: var(--destructive);
+  --color-instructive: var(--instructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
+
   --color-input: var(--input);
   --color-input-background: var(--input-background);
   --color-switch-background: var(--switch-background);
@@ -118,15 +123,16 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
-@layer utilities{
-  .ctaBtn{
+@layer utilities {
+  .ctaBtn {
     @apply bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-600 transition
   }
 
-  .list-css{
+  .list-css {
     @apply text-xl px-5 hover:bg-primary/10 transition py-2 rounded-lg font-semibold
   }
-  .a-css{
+
+  .a-css {
     @apply no-underline
   }
 }

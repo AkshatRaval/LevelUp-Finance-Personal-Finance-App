@@ -1,5 +1,5 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { Camera, Eye, EyeClosed } from 'lucide-react';
+import { Camera, Eye, EyeClosed, User } from 'lucide-react';
 import React, { useState } from 'react';
 import { auth } from '../firebase'; // Make sure this path is correct
 
@@ -46,17 +46,16 @@ const Login = () => {
     };
 
     return (
-        <div className='bg-blue-950 w-screen h-screen flex items-center justify-center'>
-            <div className='bg-white p-5 flex flex-col items-center justify-between min-w-[20%] rounded-2xl shadow shadow-white/80'>
-                <div className='bg-blue-100 p-5 my-5'>
-                    <Camera size={40} />
+        <div className='bg-background w-screen h-screen flex items-center justify-center'>
+            <div className='bg-card p-5 flex flex-col items-center justify-between min-w-[20%] rounded-2xl shadow-2xl '>
+                <div className='bg-accent p-5 my-5 rounded-full flex items-center justify-center'>
+                    <User size={40} className='text-accent-foreground' />
                 </div>
                 <div className='flex flex-col items-center justify-between mb-10'>
                     <h1 className='text-3xl font-bold'>Welcome back</h1>
                     <p className='text-gray-500'>Sign in to your account to continue</p>
                 </div>
 
-                {/* 4. Use a <form> with the onSubmit handler */}
                 <form className='w-full' onSubmit={handleLogin}>
                     <div className='flex flex-col justify-between w-full *:py-2'>
                         <label htmlFor="email" className='font-semibold'>Email</label>
@@ -65,7 +64,6 @@ const Login = () => {
                             id="email"
                             placeholder='john@gmail.com'
                             className='p-2 border rounded-[10px]'
-                            // 5. Connect input to the 'email' state
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
@@ -77,7 +75,6 @@ const Login = () => {
                                 id="password"
                                 placeholder='Enter Your Password'
                                 className='p-2 border rounded-[10px]'
-                                // 6. Connect input to the 'password' state
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
@@ -88,15 +85,14 @@ const Login = () => {
                         </div>
                     </div>
 
-                    {/* 7. Display the error message if it exists */}
                     {error && <p className='text-red-500 text-sm my-2'>{error}</p>}
 
-                    <button type="submit" className='bg-primary w-full p-3 text-white text-lg rounded-2xl cursor-pointer my-5'>
+                    <button type="submit" className='bg-primary w-full p-3 text-primary-foreground text-lg rounded-2xl cursor-pointer my-5'>
                         Sign In
                     </button>
                 </form>
 
-                <p>Don't have an account? <a href="/signup" className='text-blue-800'>Sign up</a></p>
+                <p>Don't have an account? <a href="/signup" className='text-primary underline'>Sign up</a></p>
             </div>
         </div>
     );

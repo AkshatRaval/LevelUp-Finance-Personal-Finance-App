@@ -110,7 +110,7 @@ const Transactions = () => {
 
 
                 <div>
-                    <div className='border border-border bg-white rounded-lg p-4 mt-4'>
+                    <div className='border border-border bg-card rounded-lg p-4 mt-4'>
                         <div className='flex items-center gap-2 mb-4'>
                             <History />
                             <div>
@@ -121,13 +121,13 @@ const Transactions = () => {
                         {/* --- Map over the FILTERED transactions --- */}
                         {filteredTransactions.length > 0 ? (
                             filteredTransactions.map((transaction) => (
-                                <div className='border border-border bg-white rounded-lg p-4 mt-4 shadow' key={transaction.id}>
+                                <div className='border border-border bg-card rounded-lg p-4 mt-4 shadow' key={transaction.id}>
                                     <div className='flex justify-between items-center'>
                                         <div>
                                             <h2 className='text-lg font-semibold'>{transaction.description}</h2>
                                             <p className='text-sm text-muted-foreground'>{transaction.category}</p>
                                         </div>
-                                        <div className={`text-lg font-semibold ${transaction.type === 'income' ? 'text-green-600' : 'text-red-600'}`}>
+                                        <div className={`text-lg font-semibold ${transaction.type === 'income' ? 'text-instructive' : 'text-destructive'}`}>
                                             {transaction.type === 'income' ? '+' : '-'} ₹{transaction.amount}
                                         </div>
                                     </div>

@@ -109,7 +109,7 @@ const Dashboard = () => {
   return (
     <div>
       <div>
-        <h1 className='text-4xl font-bold '>Dashboard</h1>
+        <h1 className='text-4xl font-bold text-foreground'>Dashboard</h1>
         <p className='text-lg text-muted-foreground'>Welcome back! Here's your financial overview.</p>
       </div>
       <section>
@@ -120,10 +120,10 @@ const Dashboard = () => {
         </div>
       </section>
       <section className='flex w-full gap-6 mt-6 flex-col md:flex-row'>
-        <div className='w-full mt-6 bg-white p-6 rounded-lg shadow-sm border border-border'>
+        <div className='w-full mt-6 bg-card p-6 rounded-lg shadow-sm border border-border'>
           <h3 className='text-xl font-bold'>Income vs Expenses</h3>
           <p className='text-sm text-muted-foreground'>Monthly comparison over the last 5 months</p>
-          <div style={{ width: "100%", height: 400 }} className='w-full bg-white p-6 rounded-lg'>
+          <div style={{ width: "100%", height: 400 }} className='w-full bg-card p-6 rounded-lg'>
             <ResponsiveContainer>
               <BarChart data={barData} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" />
@@ -137,7 +137,7 @@ const Dashboard = () => {
             </ResponsiveContainer>
           </div>
         </div>
-        <div className='w-full mt-6 bg-white p-6 rounded-lg shadow-sm border border-border'>
+        <div className='w-full mt-6 bg-card p-6 rounded-lg shadow-sm border border-border'>
           <div style={{ width: "100%", height: 400 }}>
             <h3 className='text-xl font-bold'>Expense Categories</h3>
             <p className='text-sm text-muted-foreground'>Breakdown of your spending this month</p>

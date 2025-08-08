@@ -140,11 +140,11 @@ const Profile = () => {
 
                         </div>
                     </div>
-                    <div className='border border-border bg-white rounded-lg p-4 mt-4 min-w-[20%]'>
+                    <div className='border border-border bg-card rounded-lg p-4 mt-4 min-w-[20%]'>
                         <h1 className='flex items-center gap-2 mb-4 text-lg' ><Shield size={18} />Account</h1>
                         <button className='w-full my-1 flex items-center hover:bg-accent text-lg hover:text-accent-foreground text-black py-2 rounded-xl border border-border transition-all px-4 gap-2'><Wallet size={18} />Connected Accounts</button>
                         <button className='w-full my-1 flex items-center hover:bg-accent text-lg hover:text-accent-foreground text-black py-2 rounded-xl border border-border transition-all px-4 gap-2'><Shield size={18} />Security Setting</button>
-                        <button className='w-full my-1 hover:bg-red-500 text-lg hover:text-white text-red-500 py-2 rounded-xl border border-red-500 transition-all' onClick={handleLogout}>Logout</button>
+                        <button className='w-full my-1 hover:bg-destructive text-lg hover:text-white text-destructive py-2 rounded-xl border border-destructive transition-all' onClick={handleLogout}>Logout</button>
                     </div>
 
                 </div>
