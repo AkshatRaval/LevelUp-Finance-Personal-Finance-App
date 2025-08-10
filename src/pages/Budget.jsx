@@ -8,6 +8,7 @@ import BudgetCard from '../components/BudgetCard';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '../utils/toastContext';
 import { useTransactionData } from '../utils/useTransactionData';
+import AnimatedWrapper from '../components/AnimatedPage';
 
 // TODO: You need to implement or import this hook to fetch transactions
 // For example:
@@ -107,86 +108,93 @@ const Budget = () => {
 
   return (
     <div className='relative w-full h-full p-6 bg-background transition-all duration-300'>
+
       <div className={`w-full text-foreground ${isOpen ? 'blur-sm' : ''}`}>
-        <div className='flex items-center justify-between mb-4'>
-          <div>
-            <h1 className='text-4xl font-bold'>Budget Management</h1>
-            <p className='text-lg text-muted-foreground'>Track your spending against your budget goals</p>
-          </div>
-          <button
-            className='flex gap-2 bg-primary text-primary-foreground px-5 py-2 rounded-lg font-semibold cursor-pointer'
-            onClick={() => { setIsOpen(true) }}
-          >
-            <Plus size={20} />Add Budget
-          </button>
-        </div>
+        <AnimatedWrapper >
+          <div className='flex items-center justify-between mb-4'>
 
-        {/* Cards */}
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
-          <div className='bg-card border border-border p-5 rounded-lg shadow-sm hover:shadow-md transition-shadow'>
-            <div className='text-lg font-semibold mb-9 flex items-center justify-between'>
-              <h2>Total Budget</h2>
-              <DollarSign size={14} color={'black'} />
-            </div>
             <div>
-              <div className='text-3xl font-bold'>{totalBudget}₹</div>
-              <div className='text-sm text-muted-foreground mt-1'>Monthly budget allocation</div>
+              <h1 className='text-4xl font-bold'>Budget Management</h1>
+              <p className='text-lg text-muted-foreground'>Track your spending against your budget goals</p>
+            </div>
+            <button
+              className='flex gap-2 bg-primary text-primary-foreground px-5 py-2 rounded-lg font-semibold cursor-pointer'
+              onClick={() => { setIsOpen(true) }}
+            >
+              <Plus size={20} />Add Budget
+            </button>
+          </div>
+        </AnimatedWrapper>
+        <AnimatedWrapper delay={0.3}>
+          {/* Cards */}
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
+            <div className='bg-card border border-border p-5 rounded-lg shadow-sm hover:shadow-md transition-shadow'>
+              <div className='text-lg font-semibold mb-9 flex items-center justify-between'>
+                <h2>Total Budget</h2>
+                <DollarSign size={14} color={'black'} />
+              </div>
+              <div>
+                <div className='text-3xl font-bold'>{totalBudget}₹</div>
+                <div className='text-sm text-muted-foreground mt-1'>Monthly budget allocation</div>
+              </div>
+            </div>
+
+            <div className='bg-card border border-border p-5 rounded-lg shadow-sm hover:shadow-md transition-shadow w-full'>
+              <div className='text-lg font-semibold mb-9 flex items-center justify-between'>
+                <h2>Total Spent</h2>
+                <TrendingDown size={15} className='text-destructive' />
+              </div>
+              <div>
+                <div className='text-3xl font-bold'>{totalSpent}₹</div>
+              </div>
+              <div className="w-full bg-background rounded-full h-3 mt-5">
+                <div className='bg-primary h-3 rounded-full' style={{ width: `${progress}%` }} />
+              </div>
+              <div className="text-xs text-muted-foreground text-end">{progress.toFixed(1)}%</div>
+            </div>
+
+            <div className='bg-card border border-border p-5 rounded-lg shadow-sm hover:shadow-md transition-shadow'>
+              <div className='text-lg font-semibold mb-9 flex items-center justify-between'>
+                <h2>Budget Alerts</h2>
+                <TriangleAlert size={15} className='text-destructive' />
+              </div>
+              <div>
+                <div className={`text-3xl font-bold ${budgetAlerts > 0 ? 'text-destructive' : ''}`}>{budgetAlerts}</div>
+                <div className='text-sm text-muted-foreground mt-1'>Categories over budget</div>
+              </div>
             </div>
           </div>
-
-          <div className='bg-card border border-border p-5 rounded-lg shadow-sm hover:shadow-md transition-shadow w-full'>
-            <div className='text-lg font-semibold mb-9 flex items-center justify-between'>
-              <h2>Total Spent</h2>
-              <TrendingDown size={15} className='text-destructive' />
-            </div>
-            <div>
-              <div className='text-3xl font-bold'>{totalSpent}₹</div>
-            </div>
-            <div className="w-full bg-background rounded-full h-3 mt-5">
-              <div className='bg-primary h-3 rounded-full' style={{ width: `${progress}%` }} />
-            </div>
-            <div className="text-xs text-muted-foreground text-end">{progress.toFixed(1)}%</div>
-          </div>
-
-          <div className='bg-card border border-border p-5 rounded-lg shadow-sm hover:shadow-md transition-shadow'>
-            <div className='text-lg font-semibold mb-9 flex items-center justify-between'>
-              <h2>Budget Alerts</h2>
-              <TriangleAlert size={15} className='text-destructive' />
-            </div>
-            <div>
-              <div className={`text-3xl font-bold ${budgetAlerts > 0 ? 'text-destructive' : ''}`}>{budgetAlerts}</div>
-              <div className='text-sm text-muted-foreground mt-1'>Categories over budget</div>
-            </div>
-          </div>
-        </div>
-
+        </AnimatedWrapper>
         {/* Budget Overview */}
-        <div className='mt-6 bg-card p-6 rounded-lg shadow-sm border border-border'>
-          <div className='flex items-center gap-2'>
-            <Target size={18} />
-            <h2 className='text-xl font-semibold'>Budget Overview</h2>
-          </div>
-          <p className='text-muted-foreground'>Here you can add charts or tables to visualize your budget and spending trends.</p>
+        <AnimatedWrapper delay={0.5}>
 
-          <div className='mt-6'>
-            {allbudgets.length === 0 ? (
-              <div className="text-muted-foreground">No budgets found. Add one to get started.</div>
-            ) : (
-              allbudgets.map(budget => (
-                <BudgetCard
-                  key={budget.id}
-                  card={budget}
-                  onUpdate={handleUpdateCard} // Pass Firestore update method
-                />
-              ))
-            )}
+          <div className='mt-6 bg-card p-6 rounded-lg shadow-sm border border-border'>
+            <div className='flex items-center gap-2'>
+              <Target size={18} />
+              <h2 className='text-xl font-semibold'>Budget Overview</h2>
+            </div>
+            <p className='text-muted-foreground'>Here you can add charts or tables to visualize your budget and spending trends.</p>
+
+            <div className='mt-6'>
+              {allbudgets.length === 0 ? (
+                <div className="text-muted-foreground">No budgets found. Add one to get started.</div>
+              ) : (
+                allbudgets.map(budget => (
+                  <BudgetCard
+                    key={budget.id}
+                    card={budget}
+                    onUpdate={handleUpdateCard} // Pass Firestore update method
+                  />
+                ))
+              )}
+            </div>
           </div>
-        </div>
+        </AnimatedWrapper>
       </div>
 
       {/* Add Budget Modal */}
       {isOpen && (
-        <div className='fixed inset-0 bg-black/50 z-50 flex items-center justify-center'>
+        <div className='fixed inset-0 bg-black/50 z-50 flex items-center justify-center text-foreground'>
           <div className='absolute top-[50%] right-[50%] translate-y-[-50%] translate-x-[50%] bg-card border border-border p-5 rounded-lg min-h-[50%] min-w-[30%] shadow-lg mt-4'>
             <button
               className='absolute top-5 right-5 text-muted-foreground hover:text-foreground'
@@ -205,8 +213,7 @@ const Budget = () => {
                   required
                   value={selectedCategory}
                   onChange={e => setSelectedCategory(e.target.value)}
-                  className='w-full border border-border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary'
-                >
+                  className='w-full border border-border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary bg-card'>
                   <option value="" disabled>Select category</option>
                   {totalCategories.map(cat => (
                     <option key={cat} value={cat}>{cat}</option>
@@ -233,7 +240,7 @@ const Budget = () => {
                   id="type"
                   value={period}
                   onChange={e => setPeriod(e.target.value)}
-                  className='w-full border border-border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary'
+                  className='w-full border border-border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary bg-card'
                 >
                   <option value="monthly">Monthly</option>
                   <option value="yearly">Yearly</option>

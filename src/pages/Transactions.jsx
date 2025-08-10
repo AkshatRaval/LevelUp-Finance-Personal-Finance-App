@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTransactionData } from '../utils/useTransactionData';
 import DashboardCards from '../components/DashboardCards';
 import TransactionFilters from '../components/TransactionsFilter'; // Ensure this path is correct
+import AnimatedWrapper from '../components/AnimatedPage';
 
 const Transactions = () => {
     const navigate = useNavigate();
@@ -91,54 +92,62 @@ const Transactions = () => {
         <div>
             <div className='w-full text-foreground'>
                 <div className='flex items-center justify-between mb-4'>
-                    <div>
-                        <h1 className='text-4xl font-bold'>Transactions</h1>
-                        <p className='text-lg text-muted-foreground'>Track and manage your financial transactions</p>
-                    </div>
+                    <AnimatedWrapper delay={0}>
+                        <div>
+                            <h1 className='text-4xl font-bold'>Transactions</h1>
+                            <p className='text-lg text-muted-foreground'>Track and manage your financial transactions</p>
+                        </div>
+                    </AnimatedWrapper>
                     <button className='flex gap-2 bg-primary text-primary-foreground px-5 py-2 rounded-lg font-semibold cursor-pointer' onClick={() => navigate('/dashboard/addtransactions')}><Plus size={20} />Add Transaction</button>
                 </div>
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
-                    {transactionsData.map(card => (
-                        <DashboardCards key={card.id} card={card} />
-                    ))}
-                </div>
+                <AnimatedWrapper delay={0.3}>
 
-                {/* --- Add Transactions Filter Here --- */}
-                <div className="mt-6">
-                    <TransactionFilters onFilterChange={handleFilterChange} />
-                </div>
-
-
-                <div>
-                    <div className='border border-border bg-card rounded-lg p-4 mt-4'>
-                        <div className='flex items-center gap-2 mb-4'>
-                            <History />
-                            <div>
-                                <h1 className='text-2xl font-semibold'>Transaction History</h1>
-                                <p className='text-sm text-muted-foreground'>Showing {filteredTransactions.length} of {allTransactions.length} transactions</p>
-                            </div>
-                        </div>
-                        {/* --- Map over the FILTERED transactions --- */}
-                        {filteredTransactions.length > 0 ? (
-                            filteredTransactions.map((transaction) => (
-                                <div className='border border-border bg-card rounded-lg p-4 mt-4 shadow' key={transaction.id}>
-                                    <div className='flex justify-between items-center'>
-                                        <div>
-                                            <h2 className='text-lg font-semibold'>{transaction.description}</h2>
-                                            <p className='text-sm text-muted-foreground'>{transaction.category}</p>
-                                        </div>
-                                        <div className={`text-lg font-semibold ${transaction.type === 'income' ? 'text-instructive' : 'text-destructive'}`}>
-                                            {transaction.type === 'income' ? '+' : '-'} ₹{transaction.amount}
-                                        </div>
-                                    </div>
-                                    <p className='text-sm text-muted-foreground mt-1'>{new Date(transaction.date).toLocaleDateString()}</p>
-                                </div>
-                            ))
-                        ) : (
-                            <p className="text-center text-muted-foreground mt-6">No transactions match the current filters.</p>
-                        )}
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
+                        {transactionsData.map(card => (
+                            <DashboardCards key={card.id} card={card} />
+                        ))}
                     </div>
-                </div>
+                </AnimatedWrapper>
+                <AnimatedWrapper delay={0.5}>
+                    {/* --- Add Transactions Filter Here --- */}
+                    <div className="mt-6">
+                        <TransactionFilters onFilterChange={handleFilterChange} />
+                    </div>
+                </AnimatedWrapper>
+
+                <AnimatedWrapper delay={0.7}>
+
+                    <div>
+                        <div className='border border-border bg-card rounded-lg p-4 mt-4'>
+                            <div className='flex items-center gap-2 mb-4'>
+                                <History />
+                                <div>
+                                    <h1 className='text-2xl font-semibold'>Transaction History</h1>
+                                    <p className='text-sm text-muted-foreground'>Showing {filteredTransactions.length} of {allTransactions.length} transactions</p>
+                                </div>
+                            </div>
+                            {/* --- Map over the FILTERED transactions --- */}
+                            {filteredTransactions.length > 0 ? (
+                                filteredTransactions.map((transaction) => (
+                                    <div className='border border-border bg-card rounded-lg p-4 mt-4 shadow' key={transaction.id}>
+                                        <div className='flex justify-between items-center'>
+                                            <div>
+                                                <h2 className='text-lg font-semibold'>{transaction.description}</h2>
+                                                <p className='text-sm text-muted-foreground'>{transaction.category}</p>
+                                            </div>
+                                            <div className={`text-lg font-semibold ${transaction.type === 'income' ? 'text-instructive' : 'text-destructive'}`}>
+                                                {transaction.type === 'income' ? '+' : '-'} ₹{transaction.amount}
+                                            </div>
+                                        </div>
+                                        <p className='text-sm text-muted-foreground mt-1'>{new Date(transaction.date).toLocaleDateString()}</p>
+                                    </div>
+                                ))
+                            ) : (
+                                <p className="text-center text-muted-foreground mt-6">No transactions match the current filters.</p>
+                            )}
+                        </div>
+                    </div>
+                </AnimatedWrapper>
             </div>
 
 

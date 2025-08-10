@@ -42,7 +42,7 @@ const AddTransaction = () => {
     };
 
     return (
-        <div>
+        <div className="text-foreground">
             <div>
                 <button className='flex text-xl items-center gap-2 mb-4 border border-border p-2 px-3 rounded-lg bg-accent text-accent-foreground' onClick={() => window.history.back()}>
                     <ArrowLeft /> Back
@@ -53,7 +53,7 @@ const AddTransaction = () => {
                 <p className='text-lg text-muted-foreground'>Record a new income or expense transaction</p>
             </div>
 
-            <div className='border border-border bg-white rounded-lg p-4 mt-4 max-w-[40%]'>
+            <div className='border border-border bg-card rounded-lg p-4 mt-4 max-w-[40%]'>
                 <form onSubmit={handleAddTransaction} className='mt-6 space-y-4'>
                     <div>
                         <label className='block text-sm font-medium'>Type</label>
@@ -69,7 +69,7 @@ const AddTransaction = () => {
                             name="category"
                             required
                             defaultValue=""
-                            className='w-full p-2 border border-border rounded-lg bg-white'>
+                            className='w-full p-2 border border-border rounded-lg bg-card'>
                             <option value="" disabled>Select a category</option>
                             <option value="Food & Dining">Food & Dining</option>
                             <option value="Transportation">Transportation</option>
@@ -101,7 +101,7 @@ const AddTransaction = () => {
                         <textarea name="note" rows="3" className='w-full p-2 border border-border rounded-lg'></textarea>
                     </div>
                     <div className='flex justify-end gap-2'>
-                        <button className='bg-primary-foreground text-primary border px-5 py-2 rounded-lg font-semibold' onClick={() => navigate()}>Cancel</button>
+                        <button className='bg-card text-primary border px-5 py-2 rounded-lg font-semibold' onClick={() => navigate()}>Cancel</button>
                         <button type="submit" className='bg-primary text-primary-foreground px-5 py-2 rounded-lg font-semibold'>Add Transaction</button>
                     </div>
                 </form>

@@ -1,22 +1,20 @@
-// components/AnimatedPage.js
-import { motion } from "framer-motion";
+import React, { useRef, useEffect } from 'react';
+import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
 
-const animations = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -20 },
+const AnimatedWrapper = ({ children, animationConfig,  delay = 0 }) => {
+  const el = useRef(null);
+
+  useGSAP(() => {
+    // default animation or custom config
+    gsap.fromTo(
+      el.current,
+      animationConfig?.from || { opacity: 0, y: 20 },
+      animationConfig?.to || { opacity: 1, y: 0, duration: 1, delay: delay }
+    );
+  }, [animationConfig]);
+
+  return <div ref={el}>{children}</div>;
 };
 
-export default function AnimatedPage({ children }) {
-  return (
-    <motion.div
-      variants={animations}
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      transition={{ duration: 0.4 }}
-    >
-      {children}
-    </motion.div>
-  );
-}
+export default AnimatedWrapper;

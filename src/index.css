@@ -136,6 +136,11 @@
     @apply no-underline
   }
 }
+@layer base{
+  button{
+    @apply cursor-pointer
+  }
+}
 
 
 html {

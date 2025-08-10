@@ -5,29 +5,57 @@ import { useAuth } from '../contexts/AuthContexts';
 import { doc, getDoc } from 'firebase/firestore';
 import DashboardCards from '../components/DashboardCards.jsx'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from "recharts";
+import AnimatedWrapper from '../components/AnimatedPage.jsx';
+import { useTransactionData } from '../utils/useTransactionData.js';
 const Dashboard = () => {
 
   // Fetch user finance data from Firestore
   const { currentUser } = useAuth();
   const [userData, setUserData] = useState(null);
-  const [loading, setLoading] = useState(true); // Add a loading state
+  const { transactionData = [] } = useTransactionData(); // default empty array
+  const [loading, setLoading] = useState(true); // loading state if needed
 
-  const barData = [
-    { name: "Jan", Income: 4800, Expenses: 3200 },
-    { name: "Feb", Income: 5200, Expenses: 3800 },
-    { name: "Mar", Income: 4900, Expenses: 3500 },
-    { name: "Apr", Income: 5400, Expenses: 4200 },
-    { name: "May", Income: 5100, Expenses: 3700 },
+  const categories = [
+    "Food & Dining",
+    "Transportation",
+    "Shopping",
+    "Entertainment",
+    "Bills",
   ];
 
 
-  const pieData = [
-    { name: "Food & Dining", value: 32 },
-    { name: "Transportation", value: 21 },
-    { name: "Shopping", value: 16 },
-    { name: "Entertainment", value: 11 },
-    { name: "Bills", value: 20 },
-  ];
+  // Calculate sums per category
+  const pieData = categories.map(category => {
+    const total = transactionData
+      .filter(tx => tx.category === category)
+      .reduce((sum, tx) => sum + (tx.amount || 0), 0);
+    return { name: category, value: total };
+  });
+  const monthlyData = {};
+
+  const getMonthName = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleString('default', { month: 'short' }); // e.g. "Jan"
+  };
+  transactionData.forEach(tx => {
+    const month = getMonthName(tx.date); // Assuming tx.date is a date string or timestamp
+    if (!monthlyData[month]) {
+      monthlyData[month] = { Income: 0, Expenses: 0 };
+    }
+    if (tx.type === 'income') {
+      monthlyData[month].Income += tx.amount || 0;
+    } else if (tx.type === 'expense') {
+      monthlyData[month].Expenses += tx.amount || 0;
+    }
+  });
+  const barData = Object.entries(monthlyData).map(([month, data]) => ({
+    name: month,
+    Income: data.Income,
+    Expenses: data.Expenses,
+  }));
+  const monthOrder = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  barData.sort((a, b) => monthOrder.indexOf(a.name) - monthOrder.indexOf(b.name));
+
 
   const COLORS = ["#4285F4", "#00C49F", "#FFBB28", "#FF4C4C", "#9C27B0"];
 
@@ -109,15 +137,20 @@ const Dashboard = () => {
   return (
     <div className='w-full text-foreground'>
       <div>
-        <h1 className='text-4xl font-bold text-foreground'>Dashboard</h1>
-        <p className='text-lg text-muted-foreground'>Welcome back! Here's your financial overview.</p>
+        <AnimatedWrapper >
+          <h1 className='text-4xl font-bold text-foreground'>Dashboard</h1>
+          <p className='text-lg text-muted-foreground'>Welcome back! Here's your financial overview.</p>
+        </AnimatedWrapper>
+
       </div>
       <section>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6'>
-          {userFinanceData.map(card => (
-            <DashboardCards key={card.id} card={card} />
-          ))}
-        </div>
+        <AnimatedWrapper delay={0.5}>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6'>
+            {userFinanceData.map(card => (
+              <DashboardCards key={card.id} card={card} />
+            ))}
+          </div>
+        </AnimatedWrapper>
       </section>
       <section className='flex w-full gap-6 mt-6 flex-col md:flex-row'>
         <div className='w-full mt-6 bg-card p-6 rounded-lg shadow-sm border border-border'>

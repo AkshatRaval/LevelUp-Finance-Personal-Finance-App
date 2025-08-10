@@ -11,6 +11,7 @@ import Dashboard from "./pages/Dashboard";
 import Budget from "./pages/Budget";
 import Profile from "./pages/Profile";
 import AddTransaction from "./pages/AddTransaction";
+import AnimatedWrapper from "./components/AnimatedPage";
 
 
 function App() {
@@ -31,7 +32,9 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/preUserInfoForm" element={
           <PrivateRoute>
-            <PreUserInfoForm />
+            <AnimatedWrapper>
+              <PreUserInfoForm />
+            </AnimatedWrapper>
           </PrivateRoute>
         } />
         {/* Later you'll add /login, /signup, /dashboard etc */}

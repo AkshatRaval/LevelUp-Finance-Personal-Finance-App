@@ -51,7 +51,7 @@ const Sidebar = () => {
     const handleLogout = async () => {
         try {
             await signOut(auth);
-            localStorage.removeItem("token"); 
+            localStorage.removeItem("token");
             console.log("User signed out successfully!");
             navigate('/'); // Redirect to homepage without a full reload
         } catch (error) {
@@ -63,61 +63,73 @@ const Sidebar = () => {
         if (userData?.name) {
             return userData.name.split(' ').map(n => n[0]).join('');
         }
-        return <User size={18} />; 
+        return <User size={18} />;
     };
 
     return (
-        <section className="w-64 h-screen bg-card border-border border-r relative flex flex-col text-foreground">
-            <div className="p-6 border-b border-border">
-                <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                        <CreditCard className="w-4 h-4 text-primary-foreground" />
-                    </div>
-                    <div>
-                        <h2 className="font-semibold text-xl">LevelUp Finance</h2>
-                        <p className="text-xs text-muted-foreground">Your Personal Finance</p>
-                    </div>
-                </div>
-            </div>
-            <div className="p-4 border-b border-border">
-                <div className="flex items-center gap-3 mb-3">
-                    <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center">
-                        <span className="text-sm font-medium text-accent-foreground p-2">
-                            {renderUserInitials()}
-                        </span>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                        <p className="text-lg font-medium truncate">{loading ? 'Loading...' : userData?.name || 'User'}</p>
-                        <p className="text-sm text-muted-foreground truncate">{loading ? '...' : userData?.email || ''}</p>
+        <>
+            <section className="w-64 h-screen bg-card hidden border-border border-r relative sm:flex flex-col  text-foreground">
+                <div className="p-6 border-b border-border">
+                    <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                            <CreditCard className="w-4 h-4 text-primary-foreground" />
+                        </div>
+                        <div>
+                            <h2 className="font-semibold text-xl">LevelUp Finance</h2>
+                            <p className="text-xs text-muted-foreground">Your Personal Finance</p>
+                        </div>
                     </div>
                 </div>
-                <Link to="/dashboard/addtransactions" className="flex items-center justify-center gap-2 text-sm bg-primary text-primary-foreground py-2 rounded-sm hover:bg-primary/90 transition-all">
-                    <Plus size={20} />
-                    Add Transaction
-                </Link>
-            </div>
-            {/* Main navigation section */}
-            <div className="p-4 flex-grow">
-                <nav className="space-y-2">
-                    {menuItems.map(item => (
-                        <Link
-                            key={item.id}
-                            to={item.path} 
-                            className={`w-full text-left flex items-center gap-2 text-lg text-muted-foreground transition-colors cursor-pointer p-2 rounded-md hover:bg-background ${location.pathname === item.path ? 'bg-primary text-primary-foreground hover:bg-primary/90' : ''}`}>
-                            <item.icon size={16} />
-                            {item.label}
-                        </Link>
-                    ))}
-                </nav>
-            </div>
-            {/* Logout button */}
-            <div className="p-4 border-t border-border">
-                <button className='text-lg flex gap-2 items-center justify-center border border-destructive rounded-sm w-full py-2 px-5 text-destructive hover:bg-destructive hover:text-primary-foreground transition-colors' onClick={handleLogout}>
-                    <LogOut size={16} />
-                    Logout
-                </button>
-            </div>
-        </section>
+                <div className="p-4 border-b border-border">
+                    <div className="flex items-center gap-3 mb-3">
+                        <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center">
+                            <span className="text-sm font-medium text-accent-foreground p-2">
+                                {renderUserInitials()}
+                            </span>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                            <p className="text-lg font-medium truncate">{loading ? 'Loading...' : userData?.name || 'User'}</p>
+                            <p className="text-sm text-muted-foreground truncate">{loading ? '...' : userData?.email || ''}</p>
+                        </div>
+                    </div>
+                    <Link to="/dashboard/addtransactions" className="flex items-center justify-center gap-2 text-sm bg-primary text-primary-foreground py-2 rounded-sm hover:bg-primary/90 transition-all">
+                        <Plus size={20} />
+                        Add Transaction
+                    </Link>
+                </div>
+                {/* Main navigation section */}
+                <div className="p-4 flex-grow">
+                    <nav className="space-y-2">
+                        {menuItems.map(item => (
+                            <Link
+                                key={item.id}
+                                to={item.path}
+                                className={`w-full text-left flex items-center gap-2 text-lg text-muted-foreground transition-colors cursor-pointer p-2 rounded-md hover:bg-background ${location.pathname === item.path ? 'bg-primary text-primary-foreground hover:bg-primary/90' : ''}`}>
+                                <item.icon size={16} />
+                                {item.label}
+                            </Link>
+                        ))}
+                    </nav>
+                </div>
+                {/* Logout button */}
+                <div className="p-4 border-t border-border">
+                    <button className='text-lg flex gap-2 items-center justify-center border border-destructive rounded-sm w-full py-2 px-5 text-destructive hover:bg-destructive hover:text-primary-foreground transition-colors' onClick={handleLogout}>
+                        <LogOut size={16} />
+                        Logout
+                    </button>
+                </div>
+            </section>
+            <section className='sm:hidden fixed flex justify-around bottom-0 z-999 bg-background border border-border rounded-t-2xl w-full' >
+                {menuItems.map(item => (
+                    <Link
+                        key={item.id}
+                        to={item.path}
+                        className={`text-left flex items-center gap-2 text-lg my-2 text-muted-foreground transition-colors cursor-pointer p-2 rounded-md hover:bg-background ${location.pathname === item.path ? 'bg-primary text-primary-foreground hover:bg-primary/90' : ''}`}>
+                        <item.icon size={22} />
+                    </Link>
+                ))}
+            </section>
+        </>
     );
 };
 

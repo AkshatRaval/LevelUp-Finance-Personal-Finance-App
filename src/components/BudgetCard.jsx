@@ -88,17 +88,12 @@ const BudgetCard = ({ card, onUpdate }) => {
                             </span>
                         )}
                     </div>
-                    <button
-                        onClick={() => {
-                            setEditData(card);
-                            setIsModalOpen(true);
-                        }}
-                        className="bg-primary text-primary-foreground px-3 py-1.5 rounded-lg font-semibold flex items-center gap-2 hover:bg-primary/90 transition-colors"
-                    >
-                        <Edit size={18} />
-                        Edit
-                    </button>
+                    <button className='flex items-center gap-2 text-lg border border-border bg-background p-2 rounded-lg text-foreground hover:text-accent-foreground hover:bg-accent' onClick={() => {
+                        setEditData(card);
+                        setIsModalOpen(true);
+                    }} > <Edit size={18} />Edit</button>
                 </div>
+
 
                 {/* Calendar & Amount */}
                 <div className="flex items-center justify-between mb-3">

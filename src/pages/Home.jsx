@@ -1,5 +1,5 @@
+import { Mail, Pin } from 'lucide-react';
 import React from 'react'
-import Navigation from '../components/HomeNavigation'
 
 const Home = () => {
 
@@ -33,7 +33,32 @@ const Home = () => {
 
   return (<div>
 
-    <Navigation />
+    <header className="bg-white shadow-lg rounded-b-3xl px-6 md:px-16 py-4">
+      <div className="w-full flex items-center justify-between px-20">
+
+        {/* Logo */}
+        <a href="#home" className="flex items-center gap-2">
+          <img src="/src/assets/Financelogo.png" alt="LevelUp Logo" className="w-32 md:w-40 object-contain" />
+        </a>
+        <div className="flex gap-10">
+          {/* Navigation Links */}
+          <nav className="hidden md:flex items-center gap-8 text-[18px] font-medium ">
+            <a href="#home" className="hover:text-primary transition-all duration-200">Home</a>
+            <a href="#features" className="hover:text-primary transition-all duration-200">Features</a>
+            <a href="#about" className="hover:text-primary transition-all duration-200">About</a>
+            <a href="#contact" className="hover:text-primary transition-all duration-200">Contact</a>
+          </nav>
+
+          {/* CTA Button */}
+          <div className="hidden md:block">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-3 rounded-full shadow-md transition-all duration-300 text-[18px]">
+              <a href="/login">Get Started</a>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </header>
 
     {/* Hero Section */}
     <section className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white min-h-[80vh] flex items-center" id='home'>
@@ -62,7 +87,7 @@ const Home = () => {
         {features.map((feature, index) => (
           <div
             key={index}
-            className="bg-card p-6 rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.03] transition-all duration-300 animate-fade-in-up"
+            className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.03] transition-all duration-300 animate-fade-in-up"
           >
             <div
               className={`h-16 w-16 flex items-center justify-center text-3xl rounded-full mx-auto mb-4 ${feature.color}`}
@@ -121,31 +146,24 @@ const Home = () => {
           <p className="text-white mt-2">Customer Satisfaction</p>
         </div>
       </div>
-
     </section>
-
-
 
     <section className="py-16">
       <div className="max-w-6xl mx-auto px-4 text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-8 animate-fadeIn">What Our Users Say</h2>
-
         <div className="grid gap-8 md:grid-cols-3 lg:grid-cols-4">
           <div className="bg-white rounded-xl p-6 shadow-md transform hover:scale-105 transition">
             <p className="text-gray-600 mb-4">"This app helped me finally take control of my budget. It's so easy to use and looks amazing!"</p>
             <h3 className="font-semibold text-lg">— Priya S.</h3>
           </div>
-
           <div className="bg-white rounded-xl p-6 shadow-md transform hover:scale-105 transition">
             <p className="text-gray-600 mb-4">"This app helped me finally take control of my budget. It's so easy to use and looks amazing!"</p>
             <h3 className="font-semibold text-lg">— Priya S.</h3>
           </div>
-
           <div className="bg-white rounded-xl p-6 shadow-md transform hover:scale-105 transition">
             <p className="text-gray-600 mb-4">"I love the clear charts and intuitive interface. Highly recommended for anyone serious about their money."</p>
             <h3 className="font-semibold text-lg">— Rahul K.</h3>
           </div>
-
           <div className="bg-white rounded-xl p-6 shadow-md transform hover:scale-105 transition">
             <p className="text-gray-600 mb-4">"Features like expense categorization and reminders saved me so much time and stress."</p>
             <h3 className="font-semibold text-lg">— Ananya R.</h3>
@@ -153,15 +171,12 @@ const Home = () => {
         </div>
       </div>
     </section>
-
-
-    {/* Footer */}
     <footer className="bg-gray-900 text-gray-100 py-12 px-6 md:px-20 animate-fade-in-up" id='contact'>
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
 
         {/* About */}
         <div>
-          <h4 className="text-xl font-semibold mb-4">💼 About LevelUp</h4>
+          <h4 className="text-xl font-semibold mb-4">About LevelUp</h4>
           <p className="text-gray-400">
             Empowering you to make better financial decisions with smart tools and insights.
           </p>
@@ -169,20 +184,19 @@ const Home = () => {
 
         {/* Quick Links */}
         <div>
-          <h4 className="text-xl font-semibold mb-4">🔗 Quick Links</h4>
+          <h4 className="text-xl font-semibold mb-4">Quick Links</h4>
           <ul className="space-y-2 text-gray-400">
-            <li className="hover:text-white transition cursor-pointer">🏠 Home</li>
-            <li className="hover:text-white transition cursor-pointer">✨ Features</li>
-            <li className="hover:text-white transition cursor-pointer">💰 Pricing</li>
-            <li className="hover:text-white transition cursor-pointer">📖 Blog</li>
+            <li className="hover:text-white transition cursor-pointer"><a href="#home">Home</a></li>
+            <li className="hover:text-white transition cursor-pointer"><a href="#features">Features</a></li>
+            <li className="hover:text-white transition cursor-pointer"><a href="#about">About</a></li>
           </ul>
         </div>
 
         {/* Contact */}
         <div>
-          <h4 className="text-xl font-semibold mb-4">📬 Contact Us</h4>
-          <p className="text-gray-400 mb-2">📧 support@levelup.com</p>
-          <p className="text-gray-400">📍 123 Finance Street, Bengaluru</p>
+          <h4 className="text-xl font-semibold mb-4">Contact Us</h4>
+          <p className="text-gray-400 mb-2 flex items-center gap-1"><Mail size={18} /> support@levelup.com</p>
+          <p className="text-gray-400 flex items-center gap-1"><Pin size={18} /> Wankaner, Gujrat</p>
         </div>
       </div>
 
