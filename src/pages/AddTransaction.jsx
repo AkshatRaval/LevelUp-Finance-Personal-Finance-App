@@ -53,7 +53,7 @@ const AddTransaction = () => {
                 <p className='text-lg text-muted-foreground'>Record a new income or expense transaction</p>
             </div>
 
-            <div className='border border-border bg-card rounded-lg p-4 mt-4 max-w-[40%]'>
+            <div className='border border-border bg-card rounded-lg p-4 mt-4 lg:max-w-[40%]'>
                 <form onSubmit={handleAddTransaction} className='mt-6 space-y-4'>
                     <div>
                         <label className='block text-sm font-medium'>Type</label>

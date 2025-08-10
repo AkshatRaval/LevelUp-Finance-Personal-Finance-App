@@ -135,7 +135,7 @@ const Dashboard = () => {
 
 
   return (
-    <div className='w-full text-foreground'>
+    <div className='w-full text-foreground pb-20 md:pb-0'>
       <div>
         <AnimatedWrapper >
           <h1 className='text-4xl font-bold text-foreground'>Dashboard</h1>

@@ -89,14 +89,13 @@ const Profile = () => {
                 </div>
             </AnimatedWrapper>
 
-            <div className='flex w-full mt-4 gap-6'>
+            <div className='flex flex-col w-full lg:flex-row mt-4 gap-6'>
                 {/* Left Side */}
                 <div className='w-full'>
                     <AnimatedWrapper delay={0.5}>
                         <div className='border border-border bg-card rounded-lg p-4 mt-4 '>
                             <div className='flex justify-between items-center mb-4'>
                                 <p className='flex items-center gap-2 text-lg'><User size={18} />Pesonal Information</p>
-                                <button className='flex items-center gap-2 text-lg border border-border bg-background p-2 rounded-lg text-foreground hover:text-accent-foreground hover:bg-accent'> <Edit size={18} />Edit</button>
                             </div>
                             <div>
                                 <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
@@ -148,7 +147,7 @@ const Profile = () => {
                 </div>
 
                 {/* Right Side */}
-                <div className='w-[50%] flex flex-col gap-4 text-foreground'>
+                <div className='w-full flex flex-col lg:w-[50%] gap-4 text-foreground'>
                     <AnimatedWrapper delay={0.5}>
                         <div className='border border-border bg-card rounded-lg p-4 mt-4 min-w-[20%]'>
                             <h1 className='flex items-center gap-2 mb-4 text-lg' ><Settings size={18} />Appearance</h1>
@@ -163,7 +162,7 @@ const Profile = () => {
                         </div>
                     </AnimatedWrapper>
                     <AnimatedWrapper delay={0.7}>
-                        <div className='border border-border bg-card rounded-lg p-4 mt-4 min-w-[20%]'>
+                        <div className='border border-border bg-card rounded-lg p-4 mt-4 min-w-[20%] mb-20'>
                             <h1 className='flex items-center gap-2 mb-4 text-lg' ><Shield size={18} />Account</h1>
                             <button className='w-full my-1 flex items-center hover:bg-accent text-lg hover:text-accent-foreground text-foreground py-2 rounded-xl border border-border transition-all px-4 gap-2'><Wallet size={18} />Connected Accounts</button>
                             <button className='w-full my-1 flex items-center hover:bg-accent text-lg hover:text-accent-foreground text-foreground py-2 rounded-xl border border-border transition-all px-4 gap-2'><Shield size={18} />Security Setting</button>

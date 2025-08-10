@@ -61,7 +61,7 @@ const Signup = () => {
 
   return (
     <div className='bg-background w-screen h-screen flex items-center justify-center text-foreground'>
-      <div className='bg-card p-5 flex flex-col items-center justify-between min-w-[20%] rounded-2xl shadow-2xl'>
+      <div className='bg-card p-5 flex flex-col items-center justify-between w-[25rem] rounded-2xl shadow-2xl'>
         <div className='bg-accent p-5 my-5 rounded-full flex items-center justify-center'>
           <User size={40} className='text-accent-foreground' />
         </div>
@@ -109,7 +109,7 @@ const Signup = () => {
           {error && <p className='text-destructive text-sm my-2'>{error}</p>}
 
           {/* Minor Fix: Changed button text to "Sign Up" and type to "submit" */}
-          <button type="submit" className='bg-primary w-full p-3 text-foreground text-lg rounded-2xl cursor-pointer my-5'>
+          <button type="submit" className='bg-primary w-full p-3 text-primary-foreground text-lg rounded-2xl cursor-pointer my-5'>
             Sign Up
           </button>
         </form>

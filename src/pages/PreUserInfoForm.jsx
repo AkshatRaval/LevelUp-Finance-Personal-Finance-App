@@ -56,8 +56,8 @@ const PreUserInfoForm = () => {
         <div className='flex items-center justify-center min-h-screen bg-background text-foreground'>
             <form
                 onSubmit={handleSubmit}
-                className="min-w-3xl mx-auto p-6 bg-card rounded-lg shadow space-y-6">
-                <h2 className="text-2xl font-bold text-center mb-4">User Profile Information</h2>
+                className="lg:min-w-3xl mx-auto my-5 p-6 bg-card rounded-lg shadow space-y-6">
+                <h2 className="text-2xl font-bold text-center  mb-4">User Profile Information</h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>

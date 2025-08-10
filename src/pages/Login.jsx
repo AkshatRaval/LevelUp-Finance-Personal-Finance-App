@@ -52,8 +52,8 @@ const Login = () => {
     };
 
     return (
-        <div className='bg-background w-screen h-screen flex items-center justify-center text-foreground'>
-            <div className='bg-card p-5 flex flex-col items-center justify-between min-w-[20%] rounded-2xl shadow-2xl '>
+        <div className='bg-background w-screen h-screen flex items-center justify-center text-foreground px-10 sm:px-20 '>
+            <div className='bg-card p-5 flex flex-col items-center justify-between w-[25rem] rounded-2xl shadow-2xl '>
                 <div className='bg-accent p-5 my-5 rounded-full flex items-center justify-center'>
                     <User size={40} className='text-accent-foreground' />
                 </div>
@@ -98,7 +98,7 @@ const Login = () => {
                     </button>
                 </form>
 
-                <p>Don't have an account? <a href="/signup" className='text-primary-foreground underline'>Sign up</a></p>
+                <p>Don't have an account? <a href="/signup" className='text-primary underline'>Sign up</a></p>
             </div>
         </div>
     );

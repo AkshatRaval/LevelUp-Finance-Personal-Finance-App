@@ -12,6 +12,7 @@ import Budget from "./pages/Budget";
 import Profile from "./pages/Profile";
 import AddTransaction from "./pages/AddTransaction";
 import AnimatedWrapper from "./components/AnimatedPage";
+import NotFound from "./pages/NotFound";
 
 
 function App() {
@@ -51,8 +52,8 @@ function App() {
           <Route path="budget" element={<Budget />} />        {/* /dashboard/budget */}
           <Route path="profile" element={<Profile />} />      {/* /dashboard/profile */}
           <Route path="addtransactions" element={<AddTransaction />} />      {/* /dashboard/addTransaction */}
-
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );

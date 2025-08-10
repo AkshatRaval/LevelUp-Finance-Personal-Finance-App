@@ -91,15 +91,15 @@ const Transactions = () => {
     return (
         <div>
             <div className='w-full text-foreground'>
-                <div className='flex items-center justify-between mb-4'>
-                    <AnimatedWrapper delay={0}>
+                <AnimatedWrapper delay={0}>
+                    <div className='flex items-center justify-between mb-4'>
                         <div>
-                            <h1 className='text-4xl font-bold'>Transactions</h1>
-                            <p className='text-lg text-muted-foreground'>Track and manage your financial transactions</p>
+                            <h1 className='text-2xl sm:text-4xl font-bold'>Transactions</h1>
+                            <p className='text-xs md:text-lg text-muted-foreground'>Track and manage your financial transactions</p>
                         </div>
-                    </AnimatedWrapper>
-                    <button className='flex gap-2 bg-primary text-primary-foreground px-5 py-2 rounded-lg font-semibold cursor-pointer' onClick={() => navigate('/dashboard/addtransactions')}><Plus size={20} />Add Transaction</button>
-                </div>
+                        <button className='flex gap-2 bg-primary text-primary-foreground px-5 py-2 rounded-lg font-semibold cursor-pointer text-xs sm:text-xl items-center' onClick={() => navigate('/dashboard/addtransactions')}><Plus size={20} />Add Transaction</button>
+                    </div>
+                </AnimatedWrapper>
                 <AnimatedWrapper delay={0.3}>
 
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
@@ -117,7 +117,7 @@ const Transactions = () => {
 
                 <AnimatedWrapper delay={0.7}>
 
-                    <div>
+                    <div className='mb-20'>
                         <div className='border border-border bg-card rounded-lg p-4 mt-4'>
                             <div className='flex items-center gap-2 mb-4'>
                                 <History />
@@ -151,7 +151,7 @@ const Transactions = () => {
             </div>
 
 
-        </div>
+        </div >
     )
 }
 

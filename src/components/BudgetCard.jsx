@@ -75,20 +75,20 @@ const BudgetCard = ({ card, onUpdate }) => {
             <div className="bg-card border border-border p-6 rounded-lg m-2">
                 {/* Header */}
                 <div className="flex items-center justify-between mb-5">
-                    <div className="flex gap-2">
-                        <h2 className="text-xl font-bold text-foreground">
+                    <div className="flex flex-col sm:flex-row md:gap-2">
+                        <h2 className="text-sm md:text-xl font-bold text-foreground">
                             {card.category}
                         </h2>
-                        <span className="inline-block mt-1 px-2 py-0.5 rounded bg-accent text-xs text-accent-foreground capitalize">
+                        <span className="inline-block mt-1 px-2 md:px-3 py-0.5 rounded-2xl h-fit w-fit bg-accent text-xs text-accent-foreground capitalize">
                             {card.type}
                         </span>
                         {isOverBudget && (
-                            <span className="inline-block mt-1 px-2 py-0.5 rounded bg-red-500 text-white text-xs">
+                            <span className="inline-block mt-1 px-2 md:px-3 py-0.5 rounded-2xl h-fit w-fit bg-destructive text-xs text-card capitalize">
                                 Over Budget
                             </span>
                         )}
                     </div>
-                    <button className='flex items-center gap-2 text-lg border border-border bg-background p-2 rounded-lg text-foreground hover:text-accent-foreground hover:bg-accent' onClick={() => {
+                    <button className='flex items-center gap-2 md:text-lg border border-border bg-background p-2 rounded-lg text-foreground hover:text-accent-foreground hover:bg-accent text-sm ' onClick={() => {
                         setEditData(card);
                         setIsModalOpen(true);
                     }} > <Edit size={18} />Edit</button>
@@ -127,7 +127,7 @@ const BudgetCard = ({ card, onUpdate }) => {
 
             {/* Edit Modal */}
             {isModalOpen && (
-                <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center z-50">
+                <div className="fixed inset-0 bg-opacity-50 flex items-center justify-center z-50">
                     <div className="bg-card p-6 rounded-lg w-96 shadow-lg">
                         <h2 className="text-lg font-bold mb-4">Edit Budget</h2>
                         <div className="mb-3">
@@ -169,7 +169,7 @@ const BudgetCard = ({ card, onUpdate }) => {
                             </button>
                             <button
                                 onClick={() => handleDelete(card.id)}
-                                className="px-3 py-1 rounded bg-primary text-white"
+                                className="px-3 py-1 rounded bg-destructive text-white"
                             >
                                 Delete
                             </button>
