@@ -62,7 +62,7 @@ const Home = () => {
         {features.map((feature, index) => (
           <div
             key={index}
-            className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.03] transition-all duration-300 animate-fade-in-up"
+            className="bg-card p-6 rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.03] transition-all duration-300 animate-fade-in-up"
           >
             <div
               className={`h-16 w-16 flex items-center justify-center text-3xl rounded-full mx-auto mb-4 ${feature.color}`}
@@ -106,7 +106,7 @@ const Home = () => {
     </section>
 
 
-    <section className="py-16 bg-blue-600 relative">
+    <section className="py-16 bg-primary relative">
       <div className="max-w-6xl mx-auto px-4 text-center grid gap-8 md:grid-cols-3">
         <div>
           <h3 className="text-4xl font-bold text-white">5,000+</h3>

@@ -2,22 +2,25 @@ import React, { useEffect, useState } from 'react'
 import { useAuth } from '../contexts/AuthContexts.jsx'
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore'
 import { db } from '../firebase'
+import { useToast } from '../utils/toastContext.jsx'
 
 
 const PreUserInfoForm = () => {
+    const { showToast } = useToast()
+
     const { currentUser } = useAuth();
     if (!currentUser) {
         return <p>You are not logged in</p>
     }
 
 
-      const [isDark, setIsDark] = useState(false);
-      useEffect(() => {
+    const [isDark, setIsDark] = useState(false);
+    useEffect(() => {
         const darkMode = localStorage.getItem('darkMode') === 'true';
         setIsDark(darkMode);
         document.documentElement.classList.toggle('dark', darkMode); // Apply dark mode class based on localStorage
-      }, [])
-    
+    }, [])
+
 
     // console.log(currentUser)
     // console.log(currentUser.uid)
@@ -39,11 +42,11 @@ const PreUserInfoForm = () => {
         };
         try {
             await setDoc(doc(db, "users", currentUser.uid), userData, { merge: true })
-            alert("User Profile Updated")
+            showToast("User Profile Updated")
             window.location.href = "/"
         } catch (error) {
             console.log(error)
-            alert("User Profile failed to update")
+            showToast("User Profile failed to update")
 
         }
     }

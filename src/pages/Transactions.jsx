@@ -19,15 +19,6 @@ const Transactions = () => {
         type: 'All Types',
     });
 
-
-    const [isDark, setIsDark] = useState(false);
-    useEffect(() => {
-        const darkMode = localStorage.getItem('darkMode') === 'true';
-        setIsDark(darkMode);
-        document.documentElement.classList.toggle('dark', darkMode); // Apply dark mode class based on localStorage
-    }, [])
-
-
     // --- Filtering Logic ---
     // 3. The function that receives filter changes from the TransactionFilters component
     const handleFilterChange = useCallback((newFilters) => {
@@ -97,14 +88,14 @@ const Transactions = () => {
     }
 
     return (
-        <>
+        <div>
             <div className='w-full text-foreground'>
                 <div className='flex items-center justify-between mb-4'>
                     <div>
                         <h1 className='text-4xl font-bold'>Transactions</h1>
                         <p className='text-lg text-muted-foreground'>Track and manage your financial transactions</p>
                     </div>
-                    <button className='flex gap-2 bg-primary text-primary-foreground px-5 py-2 rounded-lg font-semibold' onClick={() => navigate('/dashboard/addtransactions')}><Plus size={20} />Add Transaction</button>
+                    <button className='flex gap-2 bg-primary text-primary-foreground px-5 py-2 rounded-lg font-semibold cursor-pointer' onClick={() => navigate('/dashboard/addtransactions')}><Plus size={20} />Add Transaction</button>
                 </div>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
                     {transactionsData.map(card => (
@@ -149,7 +140,9 @@ const Transactions = () => {
                     </div>
                 </div>
             </div>
-        </>
+
+
+        </div>
     )
 }
 

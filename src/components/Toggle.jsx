@@ -1,8 +1,6 @@
 import React from 'react'
 
-const Toggle = ({ fn } ,checked) => {
-
-
+const Toggle = ({ fn, checked }) => {
     return (
         <label className="inline-flex items-center cursor-pointer">
             <input
@@ -15,5 +13,6 @@ const Toggle = ({ fn } ,checked) => {
         </label>
     )
 }
+
 
 export default Toggle

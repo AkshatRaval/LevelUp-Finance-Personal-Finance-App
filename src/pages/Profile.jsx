@@ -18,13 +18,17 @@ const Profile = () => {
     }
 
     const toggleDark = () => {
-        setIsDark(!isDark);
-        document.documentElement.classList.toggle('dark', !isDark);
-        localStorage.setItem('darkMode', !isDark) // Toggle dark mode class
-    }
+        setIsDark(prev => {
+            const newDark = !prev;
+            document.documentElement.classList.toggle('dark', newDark);
+            localStorage.setItem('darkMode', newDark);
+            return newDark;
+        });
+    };
+
 
     useEffect(() => {
-        const darkMode = localStorage.getItem('darkMode') === 'true' ;
+        const darkMode = localStorage.getItem('darkMode') === 'true';
         setIsDark(darkMode);
         document.documentElement.classList.toggle('dark', darkMode); // Apply dark mode class based on localStorage
     }, [])
@@ -146,7 +150,7 @@ const Profile = () => {
                                 <h1 className='text-lg'>Dark Mode</h1>
                                 {isDark ? <p className='text-sm'>Dark Theme</p> : <p className='text-sm'>Light Theme</p>}
                             </div>
-                            <Toggle fn={() => { toggleDark() }} checked={localStorage.getItem('darkMode') === 'true'} />
+                            <Toggle fn={toggleDark} checked={isDark} />
 
                         </div>
                     </div>
