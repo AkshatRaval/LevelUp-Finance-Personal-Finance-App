@@ -38,7 +38,7 @@ const Home = () => {
 
         {/* Logo */}
         <a href="#home" className="flex items-center gap-2">
-          <img src="/src/assets/Financelogo.png" alt="LevelUp Logo" className="w-32 md:w-40 object-contain" />
+          <img src="/assets/Financelogo.png" alt="LevelUp Logo" className="w-32 md:w-40 object-contain" />
         </a>
         <div className="flex gap-10">
           {/* Navigation Links */}
@@ -70,12 +70,12 @@ const Home = () => {
           <p className="text-lg md:text-xl">Track expenses, set budgets, and achieve your financial goals effortlessly.</p>
           <div className="flex space-x-4">
             <a href="/login" className="bg-white text-indigo-600 font-bold py-3 px-6 rounded-full shadow hover:bg-gray-100 transition">Get Started</a>
-            <a href="/about" className="border-2 border-white text-white font-bold py-3 px-6 rounded-full hover:bg-white hover:text-indigo-600 transition">Learn More</a>
+            <a href="#about" className="border-2 border-white text-white font-bold py-3 px-6 rounded-full hover:bg-white hover:text-indigo-600 transition">Learn More</a>
           </div>
         </div>
         {/* <!-- Image content --> */}
         <div className="flex justify-center items-center animate-fadeInRight">
-          <img src="src/assets/Dashboard.png" alt="App Dashboard" className="rounded-xl shadow-2xl max-h-[500px] w-auto" />
+          <img src="assets/Dashboard.png" alt="App Dashboard" className="rounded-xl shadow-2xl max-h-[500px] w-auto" />
         </div>
       </div>
     </section>
@@ -111,17 +111,17 @@ const Home = () => {
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="p-6 rounded-lg shadow hover:shadow-xl transition duration-300">
-            <img src="src/assets/About-1.png" alt="Easy to Use" className="h-16 mx-auto mb-4" />
+            <img src="assets/About-1.png" alt="Easy to Use" className="h-16 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-700 mb-2">User-Friendly</h3>
             <p className="text-gray-500">Designed with simplicity so anyone can start managing money confidently.</p>
           </div>
           <div className="p-6 rounded-lg shadow hover:shadow-xl transition duration-300">
-            <img src="src/assets/About-2.png" alt="Secure" className="h-16 mx-auto mb-4" />
+            <img src="assets/About-2.png" alt="Secure" className="h-16 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-700 mb-2">Secure</h3>
             <p className="text-gray-500">Your financial data is protected with industry-standard encryption.</p>
           </div>
           <div className="p-6 rounded-lg shadow hover:shadow-xl transition duration-300">
-            <img src="src/assets/About-3.png" alt="Insights" className="h-16 mx-auto mb-4" />
+            <img src="assets/About-3.png" alt="Insights" className="h-16 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-700 mb-2">Powerful Insights</h3>
             <p className="text-gray-500">AI-driven analysis gives you actionable advice for smarter spending.</p>
           </div>
