@@ -38,7 +38,6 @@ function App() {
             </AnimatedWrapper>
           </PrivateRoute>
         } />
-        {/* Later you'll add /login, /signup, /dashboard etc */}
         <Route
           path="/dashboard"
           element={
