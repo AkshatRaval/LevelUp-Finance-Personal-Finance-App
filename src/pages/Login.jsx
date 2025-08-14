@@ -17,7 +17,6 @@ const Login = () => {
     if (localStorage.getItem('token')) {
         window.location.href = '/dashboard'; // Redirect if already logged in
         return null; // Prevent rendering the login form
-
     }
 
     // 2. The improved login handler function
@@ -39,10 +38,8 @@ const Login = () => {
             console.log("Logged in as:", userCredential.user);
             window.location.href = '/dashboard';
             localStorage.setItem('token', userCredential.user.accessToken); // Store token if needed
-            // Success! You can redirect the user to the dashboard here.
         } catch (err) {
             console.error("Login error:", err.code);
-            // 3. Provide user-friendly error messages
             if (err.code === 'auth/invalid-credential' || err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password') {
                 setError("Invalid email or password. Please try again.");
             } else {
